@@ -27,9 +27,51 @@ In each attack, we demonstrate results that are competitive with prior work but 
 This repository comprises the following artifacts:
 ```
 .
-|-- scripts: evaluation scripts on controlled preemption primitives
+|-- primitives: evaluation scripts on controlled preemption primitives
 |-- poc: proof-of-concept attacks
 ```
+
+# System Setup
+All the experiments are run on Ubuntu 22.04.4 LTS with Intel Core i9-9900K machine and 64GB RAM. We use off-the-shelf Linux Kernel 6.5 for experimenst on CFS and 6.12-rc1 for EEVDF.
+## Compiling Kernels
+Our experiments requires kernel support for eBPF and kprobe. Off-the-shelf kernel configuration have all relevant configurations on by default. If you want to modify your own system, please those configutations on. 
+```
+CONFIG_BPF=y
+CONFIG_BPF_SYSCALL=y
+# [optional, for tc filters]
+CONFIG_NET_CLS_BPF=m
+# [optional, for tc actions]
+CONFIG_NET_ACT_BPF=m
+CONFIG_BPF_JIT=y
+# [for Linux kernel versions 4.1 through 4.6]
+CONFIG_HAVE_BPF_JIT=y
+# [for Linux kernel versions 4.7 and later]
+CONFIG_HAVE_EBPF_JIT=y
+# [optional, for kprobes]
+CONFIG_BPF_EVENTS=y
+# Need kernel headers through /sys/kernel/kheaders.tar.xz
+CONFIG_IKHEADERS=y
+```
+For more information on eBPF kernel configurations, please visit [here](https://github.com/iovisor/bcc/blob/82f9d1cb633aa3b4ebcbbc5d8b809f48d3dfa222/docs/kernel_config.md).
+
+## Getting eBPF toolchain
+Install eBPF toolchain bcc
+```bash
+sudo apt-get install bpfcc-tools linux-headers-$(uname -r)
+```
+If you use costom built kernel, follow the [instruction](https://www.kernel.org/doc/Documentation/kbuild/headers_install.txt) to install kernel header. 
+
+## Booting Linux
+To run primitive experiments, it is best to isolate cores thus normal system processes won't affect the experiment. To do that, add ```isolcpus=``` in your boot config, assuming an eight physical core system
+```
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash isolcpus=4,5,12,13
+```
+
+# Primitive Evaluation
+This evaluation corresponds to Section 4.3 on the paper. See here for more details.
+
+# Proof-of-Concept Attacks
+The proof-of-concept attacks corresponds to Section 5 on the paper. See here for more details.
 
 # Citation
 If you think our work is helpful and relevant for your research, please kindly cite our paper:
