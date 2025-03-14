@@ -34,22 +34,14 @@ This repository comprises the following artifacts:
 ## System Setup
 All the experiments are run on Ubuntu 22.04.4 LTS with Intel Core i9-9900K machine and 64GB RAM. We use off-the-shelf Linux Kernel 6.5 for experimenst on CFS and 6.12-rc1 for EEVDF.
 ### Compiling Kernels
-Our experiments requires kernel support for eBPF and kprobe. Off-the-shelf kernel configuration have all relevant configurations on by default. If you want to modify your own system, please those configutations on. 
+Our experiments requires kernel support for eBPF and kprobe. Off-the-shelf kernel configuration have all relevant configurations on by default. If you want to modify your own system, please leave these configutations on. 
 ```
 CONFIG_BPF=y
 CONFIG_BPF_SYSCALL=y
-# [optional, for tc filters]
-CONFIG_NET_CLS_BPF=m
-# [optional, for tc actions]
-CONFIG_NET_ACT_BPF=m
 CONFIG_BPF_JIT=y
-# [for Linux kernel versions 4.1 through 4.6]
 CONFIG_HAVE_BPF_JIT=y
-# [for Linux kernel versions 4.7 and later]
 CONFIG_HAVE_EBPF_JIT=y
-# [optional, for kprobes]
 CONFIG_BPF_EVENTS=y
-# Need kernel headers through /sys/kernel/kheaders.tar.xz
 CONFIG_IKHEADERS=y
 ```
 For more information on eBPF kernel configurations, please visit [here](https://github.com/iovisor/bcc/blob/82f9d1cb633aa3b4ebcbbc5d8b809f48d3dfa222/docs/kernel_config.md).

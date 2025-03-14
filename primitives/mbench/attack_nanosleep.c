@@ -14,7 +14,6 @@ int main(int argc, char** argv){
     prctl(PR_SET_TIMERSLACK, 1, 0, 0, 0);
     int cnt = CNT_RELOAD_VALUE;
     printf("Attacker PID: %ld\n", (long)getpid());
-    sleep(5);
     while(1){
         nanosleep(&(struct timespec){0, interval}, NULL);
         // Attacker dummy workload, to be replaced with the actual attack
