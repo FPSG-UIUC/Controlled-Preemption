@@ -68,10 +68,10 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash isolcpus=4,5,12,13
 ```
 
 # Primitive Evaluation
-This evaluation corresponds to Section 4.3 on the paper. See here for more details.
+This evaluation corresponds to Section 4.3 on the paper. See [here](https://github.com/FPSG-UIUC/Controlled-Preemption/tree/main/primitives) for more details.
 
 # Proof-of-Concept Attacks
-The proof-of-concept attacks corresponds to Section 5 on the paper. See here for more details.
+The proof-of-concept attacks corresponds to Section 5 on the paper. See [here](https://github.com/FPSG-UIUC/Controlled-Preemption/tree/main/poc) for more details.
 
 # Citation
 If you think our work is helpful and relevant for your research, please kindly cite our paper:
